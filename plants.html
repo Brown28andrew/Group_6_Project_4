@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Plant Simulator</title>
+
+    <!-- Import CSS-->
+    <link rel="stylesheet" href="resources/plants.css"/>
+
+    <!-- Import JavaScript -->
+    <script src="resources/plants.js" defer></script>
+  </head>
+
+  <body style="font-family: sans-serif">
+    <div>
+      <div>
+        <!-- This is the start of content for our page -->
+        <h1 class = "title">Plant Simulator (Prototype)</h1>
+        <h4 class = "subtitle">
+          Designed by: Truman Klenklen, Raj Nara, Zachary Sambol, Andrew Brown, and Drew Fink<br>EECS 448 @ KU
+        </h4>
+        </div>
+
+        <plant-panel style= "text-align: center;" id="gamepanel" hidden>
+            <!-- This is not expandable right now. Add changeable # of plants later? -->
+            <div data-tabname="0"></div>
+            <div data-tabname="1"></div>
+            <div data-tabname="2"></div>
+            <div data-tabname="3"></div>
+        </plant-panel>
+
+        <div style= "text-align: center;" id="ingame" hidden>
+          <button class="waterCur" id="waterCur" style="background-color:#3B46C4" onclick="waterPlant()">Water Plant</button>
+          <h1 id="days">You are on: Day <span id="dayCounter"></span></h1>
+          <button class="advance" id="advance" style="background-color:#3B46C4" onclick="advanceDay()">Advance</button>
+        </div>
+
+        <!-- These are buttons on the page that will start the game and reset the game respectively -->
+        <div style = "text-align: center;">
+          <button class="start" id="start" style="background-color:#3B46C4" onclick="gameHandler()">Start Game</button>
+          <button class="start" id="start" style="background-color:#3B46C4" onclick="window.location.reload()">Reset Game</button>
+        </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+:root {
+    --color-bg: #c7c7c7 ;
+    --wrapper-height: 87vh;
+    --image-max-width: 300px;
+    --image-margin: 3rem;
+}
+
+.title {
+    font-size: 50px;
+    line-height: 105%;
+    margin: 0;
+}
+
+button {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    vertical-align: top;
+}
+
+#plant1 {
+    background-image: url("image/plant.png");
+    background-size: 294px 384px;
+    height: 384px;  
+    width: 294px;
+}
+
+.subtitle {
+    font-size: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: #009947;
+}
+
+h4 {
+    text-align: center;
+    color: #000599;
+}
+
+body {
+    background-color: var(--color-bg);
+}
+
+p {
+    writing-mode: vertical-lr;
+    text-orientation: upright;
+}
