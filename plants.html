@@ -30,7 +30,10 @@
         </plant-panel>
 
         <div style= "text-align: center;" id="ingame" hidden>
-          <button class="waterCur" id="waterCur" style="background-color:#3B46C4" onclick="waterPlant()">Water Plant</button>
+          <button class="rename" id="rename" style="background-color:#3B46C4" onclick="renamePlant()">Rename plant</button>
+          <button class="waterCur" id="waterCur" style="background-color:#3B46C4" onclick="waterPlant()">Water plant</button>
+          <button class="setSun" id="setSun" style="background-color:#3B46C4" onclick="setSunPlant()">Set in sunlight</button>
+          <button class="remSun" id="remSun" style="background-color:#3B46C4" onclick="removeSunPlant()">Remove from sunlight</button>
           <h1 id="days">You are on: Day <span id="dayCounter"></span></h1>
           <button class="advance" id="advance" style="background-color:#3B46C4" onclick="advanceDay()">Advance</button>
         </div>
