@@ -1,0 +1,10 @@
+For our Project 3, the software architecture we used would be 3-tier architecture. The three tiers of our project 3 would be the Presentation tier, the Logic
+tier, and the Data tier. Because we used JavaScript and HTML, creating the Presentation tier was not difficult. The HTML code along with a bit of 
+CSS would be considered our Presentation tier or front-end, and that can be changed easily without having to update the entire back-end of the code base. For 
+the Logic tier, our functions that we add would be considered the logic behind the code base. For example, the class Plant creates a plant with all
+the standard values of what a plant requires, like the soil, water and the sun. We also have another function called advanceDay, where if you 
+advance the day, the amount of water the plant has decreases by a random number between 3 and 14. So, multiple functions in the JavaScript code
+create our Logic tier. The Data tier would be the attributes that each plant has. Right now, each plant has 5 attributes to it. They are the water
+content, the type of soil, the amount of sunlight, the name of the plant, and finally if it is living or not. Our Logic tier uses these 5 attributes
+and changes them accordingly to how the game is played. Therefore, combining all these tiers, we get our fully functioning game. We might need to add
+another tier for Project 4, and make it an N-tier architecture, but for now, we only require 3 tiers.

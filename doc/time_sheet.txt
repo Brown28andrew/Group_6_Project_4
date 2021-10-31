@@ -1,0 +1,28 @@
+Estimate of Work Hours: 30 hours
+
+We came at this number using the Lines of Code approach. We decided that we would require around 400-500 lines of code for Project 3.                     
+To code 20 lines per hour seemed reasonable, and we knew that not every line would take the same amount of time, so we took into account
+the research and Googling that would go behind it as well. That brings us to 20 hours of just coding and researching, and the remaining 
+10 hours would be spent meeting up over Zoom or in person to work on the project together. 
+
+
+Time Sheet:
+
+Raj Nara:
+Oct. 18: 1 hr 30 min
+    -The team got together to discuss potential ideas for Project 3.
+
+Oct. 31: 1 hr 30 min
+    -Finishing up required documentation.
+
+Andrew Brown:
+
+
+
+Drew Fink:
+
+
+Truman Klenklen:
+
+
+Zachary Sambol:

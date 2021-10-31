@@ -1,0 +1,11 @@
+We used the Top-Down Functional Decomposition design paradigm. Because we used JavaScript, an object-oriented programming language,
+it was very easy to add functions and make them work together. Once a flowchart has been created, coding may begin as work on the most basic 
+components first and then build out an application. First, the team had to brainstorm what ideas/projects we could have for this new project. 
+Because the entire project was given in our hands, and we were allowed to do anything we wanted to, it was hard at first to come up with a good idea.
+But, after an hour of back and forth of many great ideas, we decided on a plant-upkeep game. After we decided on the project, we created requirements
+of what the game needed, much like a rubric. Here, the big picture was laid out. We decided we needed classes like Plant, waterPlant and advanceDay.
+This added to the modularity and ease of use of the whole project. We decided this project would take the route of our Project 1, because we used JavaScript
+and HTML for Project 1, with just a plants.js, plants.html and a plants.css. So, we didn't add any new files, and decided that the 3 were enough. 
+We really didn't have a set amount of functions required, and we really just code as we went. If the code required any new functionalities, we could 
+just add a new function in a file and have it perform any function the game required, without changing a lot of already written code. So, based on all this, 
+I believe we used Top-Down Functional Decomposition as their main design paradigm.
