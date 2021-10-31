@@ -10,10 +10,12 @@ class Plant
     sun = 100;
     name = "Phyllis";
     living = true;
+    inSun = false;
+    waterToday = false;
 
-    constructor(name)
+    constructor()
     {
-        //this.name = name; // Unused right now. Maybe in the future you can name your plants.
+
     }
 }
 
@@ -36,13 +38,52 @@ function createPlants()
 function advanceDay()
 {
     curDay++;
-    document.getElementById("dayCounter").innerHTML = curDay;
+    document.getElementById("dayCounter").innerHTML = curDay; // Update the current day counter on the page.
     for (const p of plantArr)
     {
-        p.water -= (randomInRange(3, 14));
+        p.waterToday = false;
+        if(p.inSun)
+        {
+            p.sun += (randomInRange(5, 10)); // If the plant is in the sun, increase its sun amount
+        }
+        else
+        {
+            p.sun -= (randomInRange(5, 13)); // If the plant is not, decrease it
+        }
+
+        p.water -= (randomInRange(3, 14)); // Plants will always lose water
+
+        if(p.water <= 10)
+        {
+            alert("Be careful! One of your plants is dangerously low on water!");
+        }
+
+        if(p.sun <= 10)
+        {
+            alert("Be careful! One of your plants isn't getting enough sunlight!");
+        }
+
+        if(p.sun >= 100)
+        {
+            alert("Be careful! One of your plants is getting too much sunlight!");
+        }
+
         if(p.water <= 0)
         {
-            alert("You let one of your plants die. You lose!");
+            alert("You neglected one of your plants and it ran out of water. You lose!");
+            window.location.reload();
+        }
+
+        if(p.sun <= 0)
+        {
+            alert("One of your plants got no sunlight and withered away. You lose!");
+            window.location.reload();
+        }
+
+        if(p.sun >= 110)
+        {
+            alert("You let one of your plants cook in the sun and it died. You lose!");
+            window.location.reload();
         }
     }
     updateInfo(activeTab);
@@ -50,7 +91,7 @@ function advanceDay()
 
 function gameHandler()
 {
-    document.getElementById("ingame").removeAttribute("hidden");
+    document.getElementById("ingame").removeAttribute("hidden"); // Start the game by unhiding the entire game panel.
     document.getElementById("gamepanel").removeAttribute("hidden");
     document.getElementById("dayCounter").innerHTML = curDay;
 }
@@ -58,12 +99,65 @@ function gameHandler()
 function waterPlant()
 {
     var watered = plantArr[activePlant];
-    watered.water += (randomInRange(16, 28));
-    if(watered.water >= 100)
+    if(watered.waterToday)
     {
-        watered.water = 100;
+        alert("Error: You've already watered that plant today!");
     }
-    updateInfo(activeTab);
+    else
+    {
+        watered.waterToday = true;
+        watered.water += (randomInRange(16, 28));
+        if(watered.water >= 100) // Unlike sun, water can't go over 100%.
+        {
+            watered.water = 100;
+        }
+        updateInfo(activeTab);
+    }
+}
+
+function setSunPlant()
+{
+    var curPlant = plantArr[activePlant];
+    if(curPlant.inSun)
+    {
+        alert("Error: That plant is already in the sun!");
+    }
+    else
+    {
+        curPlant.inSun = true; // Will cause the plant to gain sun over the days instead of losing it.
+        alert(`You've set plant #${activePlant + 1} in the sun. It will now replenish its sun over the days. Be careful that it does not get too much!`)
+        updateInfo(activeTab);
+    }
+}
+
+function removeSunPlant()
+{
+    var curPlant = plantArr[activePlant];
+    if(!curPlant.inSun)
+    {
+        alert("Error: That plant is not in the sun!");
+    }
+    else
+    {
+        curPlant.inSun = false;
+        alert(`You've removed plant #${activePlant + 1} from the sunlight.`)
+        updateInfo(activeTab);
+    }
+}
+
+function renamePlant()
+{
+    var curPlant = plantArr[activePlant];
+    var newName = prompt(`What do you want to rename plant #${activePlant + 1}? (min: 1, max: 20)`, curPlant.name);
+    if(newName.length <= 20 && newName.length >= 1) // We don't want people to name their plants a whole novel
+    {
+        curPlant.name = newName;
+        updateInfo(activeTab);
+    }
+    else
+    {
+        alert("Invalid name. Try again?");
+    }
 }
 
 function updateInfo(tab)
@@ -76,7 +170,7 @@ function updateInfo(tab)
                      Plant Sunlight: ${plant.sun}%<br>`;
 }
 
-function asTabs(node)
+function asTabs(node) // Appropriated from very old project of Drew's.
 {
     // builds array containing node's child elements
     var childElements = document.querySelectorAll('[data-tabname]');
