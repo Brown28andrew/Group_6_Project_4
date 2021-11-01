@@ -1,0 +1,11 @@
+The software design pattern that we chose to use was mainly the Builder software design pattern under the Creational design pattern. We chose this
+design pattern because we knew we would have more than one plant, and to create that, the Builder design pattern would be most useful. There are 5
+constraints to a plant right now, which are how much water it has, the type of soil, the amount of sun, whether it is living or not, and finally,
+its name. This changes from plant to plant, which is the backbone of the Builder software design pattern. This software design paradigm allowed us
+to use different types and representations of an object using the same construction code. Right now, we have 4 "plants", so we have 4 instances
+of the class Plant. But, each plant has a different amount of water and sun as we progress throughout the day. We added classes that add water and 
+sunlight to plants. But, the construction code is the same for each plant, and so the Builder software design pattern is the most suitable. When each
+constraint is put together, it forms the class Plant. For Project 4, we plan on utilizing the Prototype software design pattern. This way, we can
+have different types of plants without just changing the names of them, and having different conditions of how water and sunlight affects them. This 
+way, the game would be a bit more thought out and there would be a lot more possibilities of how a player could play the game. Therefore, for Project
+3, the main software design pattern we used was the Builder software design pattern.
