@@ -44,3 +44,10 @@ Oct. 26: 3h
 
 
 Zachary Sambol:
+Oct. 18: 1h 30m
+	- Team meeting to discuss and decide on potential ideas for project
+	
+Oct. 28: 1h
+	- Tested initial code by Drew
+	- Tried implementation of other features, did not push
+	
