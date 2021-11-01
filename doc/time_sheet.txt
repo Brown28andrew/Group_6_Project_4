@@ -21,6 +21,15 @@ Andrew Brown:
 
 Drew Fink:
 
+Oct. 18: 1h 30m
+    - We met and discussed possible ideas.
+
+Oct. 28: 3h
+    - Laid the groundwork for the prototype. Implemented basic features.
+
+Oct. 31: 1h
+    - Refined prototype. Updated UML diagram accordingly.
+
 
 Truman Klenklen:
 
