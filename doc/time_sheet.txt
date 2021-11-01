@@ -32,6 +32,15 @@ Oct. 31: 1h
 
 
 Truman Klenklen:
+Oct. 18: 1h 30m
+    -Team meeting to brainstorm
+   
+Oct. 19: 2h
+    -Spent time drawing up the initial concept of the game, which can be found in documentation, trying to understand how to balance it, how many features we would need, etc
+    
+Oct. 26: 3h
+    -Created Plant Game Interactions document and Bloom UML arttifact, which fleshed out the concept further, specified what we needed for project 3
+
 
 
 Zachary Sambol:
