@@ -2,11 +2,14 @@ var curDay = 1;
 var plantArr = [];
 var activePlant = 0;
 var activeTab;
+const soilType = ["Sand", "Loam", ""];
+const plantType = ["Basil", "Cactus", "Succulent", "Pothos"];
 
 class Plant
 {
     water = 100;
-    soil = "Loess";
+    soil = soilType[randomInRange(0,3)];
+    plantKind = plantType[randomInRange(0,3)];
     sun = 100;
     name = "Phyllis";
     living = true;
@@ -179,7 +182,7 @@ function asTabs(node) // Appropriated from very old project of Drew's.
     {
         tabs.push(childElements[i]);
     }
-    
+
     // builds and appends list of <button> elements
     var buttonList = document.createElement('div');
     tabs.forEach(function(tab, index)
@@ -193,7 +196,7 @@ function asTabs(node) // Appropriated from very old project of Drew's.
         });
     });
     node.insertBefore(buttonList, node.firstChild);
-    
+
     // function that event listener will call
     function selectTab(index)
     {
@@ -217,6 +220,6 @@ function asTabs(node) // Appropriated from very old project of Drew's.
                 tab.style.display = 'none';
             }
         });
-    }   
+    }
     selectTab(0); // to initially show first tab
 }asTabs(document.querySelector("plant-panel"));
