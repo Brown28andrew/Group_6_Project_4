@@ -2,14 +2,16 @@ var curDay = 1;
 var plantArr = [];
 var activePlant = 0;
 var activeTab;
-const soilType = ["Sand", "Loam", ""];
-const plantType = ["Basil", "Cactus", "Succulent", "Pothos"];
+const soilType = ["Loam", "Sand", "Silt", "Peat"];
+const plantType = ["Basil", "Cactus", "Succulent", "Pothos"]; //Basil matches with loam, cactus matches with sand, succulent matches with silt, pothos matches with peat
 
 class Plant
 {
     water = 100;
-    soil = soilType[randomInRange(0,3)];
-    plantKind = plantType[randomInRange(0,3)];
+    soilNum = randomInRange(0,3);
+    soil = soilType[soilNum];
+    plantNum = randomInRange(0,3);
+    plantKind = plantType[plantNum];
     sun = 100;
     name = "Phyllis";
     living = true;
@@ -47,6 +49,7 @@ function advanceDay()
         p.waterToday = false;
         if(p.inSun)
         {
+
             p.sun += (randomInRange(5, 10)); // If the plant is in the sun, increase its sun amount
         }
         else
@@ -54,7 +57,11 @@ function advanceDay()
             p.sun -= (randomInRange(5, 13)); // If the plant is not, decrease it
         }
 
-        p.water -= (randomInRange(3, 14)); // Plants will always lose water
+        if(p.plantNum == p.soilNum){
+          p.water -= (randomInRange(3, 14)); // Plants will always lose water
+        }else{
+          p.water -= (randomInRange(8,19)); //If the soil is not correct, the plant will lose water at a faster rate
+        }
 
         if(p.water <= 10)
         {
@@ -167,6 +174,7 @@ function updateInfo(tab)
 {
     var plant = plantArr[activePlant];
     tab.innerHTML = `Plant #${(activePlant + 1)}<br>
+                     Plant Type: ${plant.plantKind}<br>
                      Plant Name: ${plant.name}<br>
                      Plant Soil: ${plant.soil}<br>
                      Plant Water: ${plant.water}%<br>
@@ -188,7 +196,25 @@ function asTabs(node) // Appropriated from very old project of Drew's.
     tabs.forEach(function(tab, index)
     {
         var button = document.createElement('button');
+        var plantDesc = plantArr[activePlant];
         button.id = 'plant1';
+        /*if(plantDesc.plantKind == "Basil")
+        {
+            button.id = 'plant1';
+        }
+        else if(plantDesc.plantKind == "Cactus")
+        {
+            button.id = 'plant2';
+        }
+        else if(plantDesc.plantKind == "Succulent")
+        {
+            button.id = 'plant3';
+        }
+        else if(plantDesc.plantKind == "Pothos")
+        {
+            button.id = 'plant4';
+        }*/
+
         buttonList.appendChild(button);
         button.addEventListener('click', function()
         {
@@ -223,3 +249,4 @@ function asTabs(node) // Appropriated from very old project of Drew's.
     }
     selectTab(0); // to initially show first tab
 }asTabs(document.querySelector("plant-panel"));
+
