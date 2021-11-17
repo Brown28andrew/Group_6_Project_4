@@ -1,0 +1,12 @@
+A plan for deployment for this game would be to add it to an app store or a flash game website such as addictinggames.com.
+For the flash game site not much change would need to be made to the game, but for the app store we would need to change over the code to Swift. We would b able to deploy the game onto the flash site at first, and while that is up we will be able to transfer the code over for the app.
+This 2 stage deployment would also help locate defects in the code before it is placed on the appstore and fix those in the new code before it is public on that.
+The intended market for this game would be many different types. The game can be directed towards people who are interested in growing and raising plants, as well as strategists, relating to the action point aspect of the game.
+The intended age range for this game would be 8-21.
+This game would be intended to have minimal maintenance after launch, but some will still be required to fix bugs that users would come across.
+For this maintenance, there would not be a need for more than one worker on this as the game is not as high depth to need multiple workers fixing bugs and defects.
+There would be no need for a server as all of the data can be stored on the users' device which would cut down on costs. The main costs would be towards gaining rights to the name of the game along with the clipart images used for the game.
+An assumed cost for the images would be $5-$15 each equaling a max of $60 for all the pictures.
+To add the game to the apple appstore the cost would cost $99/year for the membership to add apps to the store.
+The cost for buying the domain for the game name would cost $3.
+The cost without including payment for maintenance workers would be at $162 plus an additional $99 for every year it remains on the appstore.
