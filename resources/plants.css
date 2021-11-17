@@ -25,6 +25,27 @@ button {
     width: 294px;
 }
 
+#plant2 {
+    background-image: url("image/cactus.png");
+    background-size: 294px 384px;
+    height: 384px;  
+    width: 294px;
+}
+
+#plant3 {
+    background-image: url("image/succulent.png");
+    background-size: 294px 384px;
+    height: 384px;  
+    width: 294px;
+}
+
+#plant4 {
+    background-image: url("image/pothos.jpg");
+    background-size: 294px 384px;
+    height: 384px;  
+    width: 294px;
+}
+
 .subtitle {
     font-size: 20px;
 }

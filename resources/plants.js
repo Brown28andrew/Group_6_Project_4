@@ -8,19 +8,20 @@ const plantType = ["Basil", "Cactus", "Succulent", "Pothos"]; //Basil matches wi
 class Plant
 {
     water = 100;
-    soilNum = randomInRange(0,3);
-    soil = soilType[soilNum];
-    plantNum = randomInRange(0,3);
-    plantKind = plantType[plantNum];
+    soil = "Error";
+    plantKind = "Error";
     sun = 100;
-    name = "Phyllis";
+    name = "[unnamed]";
     living = true;
     inSun = false;
     waterToday = false;
 
     constructor()
     {
-
+        var soilNum = randomInRange(0,3);
+        this.soil = soilType[soilNum];
+        var plantNum = randomInRange(0,3);
+        this.plantKind = plantType[plantNum];
     }
 }
 
@@ -196,9 +197,8 @@ function asTabs(node) // Appropriated from very old project of Drew's.
     tabs.forEach(function(tab, index)
     {
         var button = document.createElement('button');
-        var plantDesc = plantArr[activePlant];
-        button.id = 'plant1';
-        /*if(plantDesc.plantKind == "Basil")
+        var plantDesc = plantArr[index];
+        if(plantDesc.plantKind == "Basil")
         {
             button.id = 'plant1';
         }
@@ -213,7 +213,7 @@ function asTabs(node) // Appropriated from very old project of Drew's.
         else if(plantDesc.plantKind == "Pothos")
         {
             button.id = 'plant4';
-        }*/
+        }
 
         buttonList.appendChild(button);
         button.addEventListener('click', function()
@@ -235,6 +235,7 @@ function asTabs(node) // Appropriated from very old project of Drew's.
                 activePlant = number;
                 activeTab = tab;
                 tab.innerHTML = `Plant #${(number + 1)}<br>
+                                Plant Type: ${plant.plantKind}<br>
                                 Plant Name: ${plant.name}<br>
                                 Plant Soil: ${plant.soil}<br>
                                 Plant Water: ${plant.water}%<br>
