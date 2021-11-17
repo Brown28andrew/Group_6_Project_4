@@ -15,14 +15,13 @@
     <div>
       <div>
         <!-- This is the start of content for our page -->
-        <h1 class = "title">Plant Simulator (Prototype)</h1>
+        <h1 class = "title">Plant Simulator</h1>
         <h4 class = "subtitle">
           Designed by: Truman Klenklen, Raj Nara, Zachary Sambol, Andrew Brown, and Drew Fink<br>EECS 448 @ KU
         </h4>
         </div>
 
         <plant-panel style= "text-align: center;" id="gamepanel" hidden>
-            <!-- This is not expandable right now. Add changeable # of plants later? -->
             <div data-tabname="0"></div>
             <div data-tabname="1"></div>
             <div data-tabname="2"></div>
@@ -30,11 +29,12 @@
         </plant-panel>
 
         <div style= "text-align: center;" id="ingame" hidden>
+          <h3><b>Action points:</b> <span id="actpt"></span></h3>
           <button class="rename" id="rename" style="background-color:#3B46C4" onclick="renamePlant()">Rename plant</button>
           <button class="waterCur" id="waterCur" style="background-color:#3B46C4" onclick="waterPlant()">Water plant</button>
           <button class="setSun" id="setSun" style="background-color:#3B46C4" onclick="setSunPlant()">Set in sunlight</button>
           <button class="remSun" id="remSun" style="background-color:#3B46C4" onclick="removeSunPlant()">Remove from sunlight</button>
-          <h1 id="days">You are on: Day <span id="dayCounter"></span></h1>
+          <h1 id="days">Day <span id="dayCounter"></span></h1>
           <button class="advance" id="advance" style="background-color:#3B46C4" onclick="advanceDay()">Advance</button>
         </div>
 

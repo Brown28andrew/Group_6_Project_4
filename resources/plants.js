@@ -2,6 +2,14 @@ var curDay = 1;
 var plantArr = [];
 var activePlant = 0;
 var activeTab;
+var actionPoints = 3;
+
+var waterShortage = false;
+var timesWatered = 0;
+
+var waterEvent = false;
+var sunEvent = false;
+
 const soilType = ["Loam", "Sand", "Silt", "Peat"];
 const plantType = ["Basil", "Cactus", "Succulent", "Pothos"]; //Basil matches with loam, cactus matches with sand, succulent matches with silt, pothos matches with peat
 
@@ -15,12 +23,13 @@ class Plant
     living = true;
     inSun = false;
     waterToday = false;
+    exempt = false;
 
     constructor()
     {
-        var soilNum = randomInRange(0,3);
+        var soilNum = randomInRange(0,4);
         this.soil = soilType[soilNum];
-        var plantNum = randomInRange(0,3);
+        var plantNum = randomInRange(0,4);
         this.plantKind = plantType[plantNum];
     }
 }
@@ -35,7 +44,7 @@ function randomInRange(min, max) {
 
 function createPlants()
 {
-    for(var i = 0; i < 4; i++) // Only four plants for now.
+    for(var i = 0; i < 4; i++)
     {
         plantArr.push(new Plant());
     }
@@ -43,28 +52,114 @@ function createPlants()
 
 function advanceDay()
 {
+    if(Math.random() < 0.1) // 10% chance of any random event occurring
+    {
+        actionPoints = 3;
+        switch(randomInRange(1, 8))
+        {
+            case 1:
+                alert("Oh no, there's a water shortage! You can only water one plant today!");
+                waterShortage = true;
+                break;
+            case 2:
+                sunEvent = true;
+                alert("Oh no, it's a cloudy day! All of your plants lose sunlight!");
+                for (const p of plantArr)
+                {
+                    p.sun -= randomInRange(9, 18);
+                    if(p.sun <= 0) // Insta-game-over prevention
+                    {
+                        p.sun = 1;
+                    }
+                }
+                break;
+            case 3:
+                var sick = randomInRange(0, 4);
+                var sickPlant = plantArr[sick];
+                if(sickPlant.name != "[unnamed]")
+                {
+                    alert(`Oh no, ${sickPlant.name} became sick and lost half its health!`);
+                }
+                else
+                {
+                    alert(`Oh no, plant #${sick + 1} became sick and lost half its health!`);
+                }
+                plantArr[sick].water = Math.round(plantArr[sick].water / 2)
+                plantArr[sick].sun = Math.round(plantArr[sick].sun / 2);
+                break;
+            case 4:
+                alert("Oh no, you're feeling sick today! You only get one action point!");
+                actionPoints = 1;
+                break;
+            case 5:
+                waterEvent = true;
+                alert("Good news, it's a rainy day! All of your plants regain water!");
+                for (const p of plantArr)
+                {
+                    p.water += randomInRange(25, 40);
+                    if(p.water > 100) // Overflow prevention
+                    {
+                        p.water = 100;
+                    }
+                }
+                break;
+            case 6:
+                sunEvent = true;
+                alert("Good news, the sun is strong today! All of your plants regain sunlight!");
+                for (const p of plantArr)
+                {
+                    p.sun += randomInRange(25, 40);
+                    if(p.sun > 100) // Insta-game-over prevention
+                    {
+                        p.sun = 100;
+                    }
+                }
+                break;
+            case 7:
+                var lucky = randomInRange(0, 4);
+                var luckyPlant = plantArr[lucky];
+                alert(`Good news, plant #${lucky + 1} has not lost any health today!`);
+                luckyPlant.exempt = true;
+                break;
+            default:
+                alert("Error, if you're reading this, I messed up somehow.");
+                break;
+        }
+    }
+    else
+    {
+        actionPoints = 3;
+    }
+
     curDay++;
     document.getElementById("dayCounter").innerHTML = curDay; // Update the current day counter on the page.
+    document.getElementById("actpt").innerHTML = actionPoints; // Update the current action point counter on the page.
     for (const p of plantArr)
     {
         p.waterToday = false;
-        if(p.inSun)
+        if(!p.exempt)
         {
-
-            p.sun += (randomInRange(5, 10)); // If the plant is in the sun, increase its sun amount
+            if(p.inSun && !sunEvent)
+            {
+                p.water -= (randomInRange(1, 4)); // Plants will lose water at a slightly faster rate in the sun.
+                p.sun += (randomInRange(5, 10)); // If the plant is in the sun, increase its sun amount
+            }
+            else if (!sunEvent)
+            {
+                p.sun -= (randomInRange(5, 13)); // If the plant is not, decrease it
+            }
+    
+            if((p.plantNum == p.soilNum) && !waterEvent)
+            {
+                p.water -= (randomInRange(3, 14)); // Plants will always lose water
+            }
+            else if (!waterEvent)
+            {
+                p.water -= (randomInRange(8,19)); //If the soil is not correct, the plant will lose water at a faster rate
+            }
         }
-        else
-        {
-            p.sun -= (randomInRange(5, 13)); // If the plant is not, decrease it
-        }
 
-        if(p.plantNum == p.soilNum){
-          p.water -= (randomInRange(3, 14)); // Plants will always lose water
-        }else{
-          p.water -= (randomInRange(8,19)); //If the soil is not correct, the plant will lose water at a faster rate
-        }
-
-        if(p.water <= 10)
+        if(p.water <= 25)
         {
             alert("Be careful! One of your plants is dangerously low on water!");
         }
@@ -74,7 +169,7 @@ function advanceDay()
             alert("Be careful! One of your plants isn't getting enough sunlight!");
         }
 
-        if(p.sun >= 100)
+        if(p.sun > 100)
         {
             alert("Be careful! One of your plants is getting too much sunlight!");
         }
@@ -96,7 +191,23 @@ function advanceDay()
             alert("You let one of your plants cook in the sun and it died. You lose!");
             window.location.reload();
         }
+
+        else if(curDay == 40)
+        {
+            if (confirm("Congratulations, you've gotten to day 40, and all your friend's plants are alive! You win! Press OK to play infinitely and take care of the plants, or cancel to quit now."))
+            {
+                alert("Alright, have fun!");
+            }
+            else
+            {
+                curDay++; // Avoiding an infinite loop bug.
+                alert("Thanks for playing!");
+                window.location.reload();
+            }
+        }
+        p.exempt = false;
     }
+    waterShortage, waterEvent, sunEvent = false;
     updateInfo(activeTab);
 }
 
@@ -105,18 +216,27 @@ function gameHandler()
     document.getElementById("ingame").removeAttribute("hidden"); // Start the game by unhiding the entire game panel.
     document.getElementById("gamepanel").removeAttribute("hidden");
     document.getElementById("dayCounter").innerHTML = curDay;
+    document.getElementById("actpt").innerHTML = actionPoints;
+    alert(`Here's the deal: your friend has taken off on a 40-day study abroad program, and they want you to take care of their houseplants while they're gone.\n
+           They're counting on you to keep their plants alive and well! Click on the buttons representing the plants to check each plant's status.\n
+           You may only complete a certain number of actions per day. Every action consumes 1 point. Check the "Action Points" section beneath the plants to see how many you have.`);
 }
 
 function waterPlant()
 {
     var watered = plantArr[activePlant];
-    if(watered.waterToday)
+    if(actionPoints == 0)
     {
-        alert("Error: You've already watered that plant today!");
+        alert("Error: You don't have an action point to spend on this!");
+    }
+    else if(waterShortage && timesWatered >= 1)
+    {
+        alert("Error: No can do, you're in a water shortage!");
     }
     else
     {
-        watered.waterToday = true;
+        timesWatered++;
+        actionPoints--;
         watered.water += (randomInRange(16, 28));
         if(watered.water >= 100) // Unlike sun, water can't go over 100%.
         {
@@ -129,13 +249,18 @@ function waterPlant()
 function setSunPlant()
 {
     var curPlant = plantArr[activePlant];
-    if(curPlant.inSun)
+    if(actionPoints == 0)
+    {
+        alert("Error: You don't have an action point to spend on this!");
+    }
+    else if(curPlant.inSun)
     {
         alert("Error: That plant is already in the sun!");
     }
     else
     {
         curPlant.inSun = true; // Will cause the plant to gain sun over the days instead of losing it.
+        actionPoints--;
         alert(`You've set plant #${activePlant + 1} in the sun. It will now replenish its sun over the days. Be careful that it does not get too much!`)
         updateInfo(activeTab);
     }
@@ -144,13 +269,18 @@ function setSunPlant()
 function removeSunPlant()
 {
     var curPlant = plantArr[activePlant];
-    if(!curPlant.inSun)
+    if(actionPoints == 0)
+    {
+        alert("Error: You don't have an action point to spend on this!");
+    }
+    else if(!curPlant.inSun)
     {
         alert("Error: That plant is not in the sun!");
     }
     else
     {
         curPlant.inSun = false;
+        actionPoints--;
         alert(`You've removed plant #${activePlant + 1} from the sunlight.`)
         updateInfo(activeTab);
     }
@@ -174,12 +304,13 @@ function renamePlant()
 function updateInfo(tab)
 {
     var plant = plantArr[activePlant];
-    tab.innerHTML = `Plant #${(activePlant + 1)}<br>
-                     Plant Type: ${plant.plantKind}<br>
-                     Plant Name: ${plant.name}<br>
-                     Plant Soil: ${plant.soil}<br>
-                     Plant Water: ${plant.water}%<br>
-                     Plant Sunlight: ${plant.sun}%<br>`;
+    document.getElementById("actpt").innerHTML = actionPoints;
+    tab.innerHTML = `<b><u>Plant #${(activePlant + 1)}</b></u><br>
+                     <b>Plant Type:</b> ${plant.plantKind}<br>
+                     <b>Plant Name:</b> ${plant.name}<br>
+                     <b>Plant Soil:</b> ${plant.soil}<br>
+                     <b>Plant Water:</b> ${plant.water}%<br>
+                     <b>Plant Sunlight:</b> ${plant.sun}%<br>`;
 }
 
 function asTabs(node) // Appropriated from very old project of Drew's.
@@ -234,12 +365,12 @@ function asTabs(node) // Appropriated from very old project of Drew's.
                 var plant = plantArr[number];
                 activePlant = number;
                 activeTab = tab;
-                tab.innerHTML = `Plant #${(number + 1)}<br>
-                                Plant Type: ${plant.plantKind}<br>
-                                Plant Name: ${plant.name}<br>
-                                Plant Soil: ${plant.soil}<br>
-                                Plant Water: ${plant.water}%<br>
-                                Plant Sunlight: ${plant.sun}%<br>`;
+                tab.innerHTML = `<b><u>Plant #${(activePlant + 1)}</b></u><br>
+                                 <b>Plant Type:</b> ${plant.plantKind}<br>
+                                 <b>Plant Name:</b> ${plant.name}<br>
+                                 <b>Plant Soil:</b> ${plant.soil}<br>
+                                 <b>Plant Water:</b> ${plant.water}%<br>
+                                 <b>Plant Sunlight:</b> ${plant.sun}%<br>`;
                 tab.style.display = '';
             }
             else
