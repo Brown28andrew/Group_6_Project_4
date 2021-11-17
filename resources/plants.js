@@ -22,7 +22,6 @@ class Plant
     name = "[unnamed]";
     living = true;
     inSun = false;
-    waterToday = false;
     exempt = false;
 
     constructor()
@@ -136,7 +135,6 @@ function advanceDay()
     document.getElementById("actpt").innerHTML = actionPoints; // Update the current action point counter on the page.
     for (const p of plantArr)
     {
-        p.waterToday = false;
         if(!p.exempt)
         {
             if(p.inSun && !sunEvent)
