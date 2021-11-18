@@ -323,31 +323,36 @@ function renamePlant()
 }
 
 function changeSoil(){
-  var curPlant = plantArr[activePlant];
-  var newSoil = prompt('What type of soil do you want to change plant #' + (activePlant + 1) + ' to? (Loam, Sand, Silt, or Peat)', curPlant.soil);
-  if(newSoil == "Loam"){
-    curPlant.soil = newSoil;
-    curPlant.soilNum = 0;
-    actionPoints--;
-    updateInfo(activeTab);
-  }else if(newSoil == "Sand"){
-    curPlant.soil = newSoil;
-    curPlant.soilNum = 1;
-    actionPoints--;
-    updateInfo(activeTab);
-  }else if(newSoil == "Silt"){
-    curPlant.soil = newSoil;
-    curPlant.soilNum = 2;
-    actionPoints--;
-    updateInfo(activeTab);
-  }else if(newSoil == "Peat"){
-    curPlant.soil = newSoil;
-    curPlant.soilNum = 3;
-    actionPoints--;
-    updateInfo(activeTab);
+  if(actionPoints != 0){
+    var curPlant = plantArr[activePlant];
+    var newSoil = prompt('What type of soil do you want to change plant #' + (activePlant + 1) + ' to? (Loam, Sand, Silt, or Peat)', curPlant.soil);
+    if(newSoil == "Loam"){
+      curPlant.soil = newSoil;
+      curPlant.soilNum = 0;
+      actionPoints--;
+      updateInfo(activeTab);
+    }else if(newSoil == "Sand"){
+      curPlant.soil = newSoil;
+      curPlant.soilNum = 1;
+      actionPoints--;
+      updateInfo(activeTab);
+    }else if(newSoil == "Silt"){
+      curPlant.soil = newSoil;
+      curPlant.soilNum = 2;
+      actionPoints--;
+      updateInfo(activeTab);
+    }else if(newSoil == "Peat"){
+      curPlant.soil = newSoil;
+      curPlant.soilNum = 3;
+      actionPoints--;
+      updateInfo(activeTab);
+    }else{
+      alert("Error! This is not one of the soils you can choose from!")
+    }
   }else{
-    alert("Error! This is not one of the soils you can choose from!")
+    alert("Uh oh! You're out of action points for today!");
   }
+
 }
 
 function updateInfo(tab)
