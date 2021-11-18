@@ -220,6 +220,7 @@ function advanceDay()
         p.exempt = false;
     }
     waterShortage, waterEvent, sunEvent = false;
+    timesWatered = 0;
     updateInfo(activeTab);
 }
 
