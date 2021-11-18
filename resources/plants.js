@@ -10,6 +10,9 @@ var timesWatered = 0;
 var waterEvent = false;
 var sunEvent = false;
 
+var wrongSoilCount = 0;
+var wrongSoilAlerted = false;
+
 const soilType = ["Loam", "Sand", "Silt", "Peat"];
 const plantType = ["Basil", "Cactus", "Succulent", "Pothos"]; //Basil matches with loam, cactus matches with sand, succulent matches with silt, pothos matches with peat
 
@@ -134,6 +137,12 @@ function advanceDay()
         actionPoints = 3;
     }
 
+    if(wrongSoilCount >= 12 && !wrongSoilAlerted) // Alert the player near the beginning of the game if their plants are doing badly due to the soil types. The worse, the earlier.
+    {
+        alert("You've noticed that your friend has made questionable soil choices for some of his plants, and that some may be losing water more quickly than others because of it. Perhaps you should try to fix that.");
+        wrongSoilAlerted = true;
+    }
+
     curDay++;
     document.getElementById("dayCounter").innerHTML = curDay; // Update the current day counter on the page.
     document.getElementById("actpt").innerHTML = actionPoints; // Update the current action point counter on the page.
@@ -153,15 +162,12 @@ function advanceDay()
 
             if((p.plantNum == p.soilNum) && !waterEvent)
             {
-                console.log("Inside match: " + p.plantNum + ", " + p.soilNum);
                 p.water -= (randomInRange(3, 14)); // Plants will always lose water
-                console.log("Soils match for plant " + p.name + " congrats!");
             }
             else if (!waterEvent)
             {
-                console.log("Inside not match: " + p.plantNum + ", " + p.soilNum);
+                wrongSoilCount++; // Take steps towards triggering an early-game warning message about poor soil choice.
                 p.water -= (randomInRange(8,19)); //If the soil is not correct, the plant will lose water at a faster rate
-                console.log("Soils do not match for plant " + p.name + " . You should probably change that.")
             }
         }
 
@@ -320,30 +326,22 @@ function changeSoil(){
   var newSoil = prompt('What type of soil do you want to change plant #' + (activePlant + 1) + ' to? (Loam, Sand, Silt, or Peat)', curPlant.soil);
   if(newSoil == "Loam"){
     curPlant.soil = newSoil;
-    console.log("SoilNum was: "+ curPlant.soilNum);
     curPlant.soilNum = 0;
-    console.log("Changed to: "+ curPlant.soilNum);
     actionPoints--;
     updateInfo(activeTab);
   }else if(newSoil == "Sand"){
     curPlant.soil = newSoil;
-    console.log("SoilNum was: "+ curPlant.soilNum);
     curPlant.soilNum = 1;
-    console.log("Changed to: "+ curPlant.soilNum);
     actionPoints--;
     updateInfo(activeTab);
   }else if(newSoil == "Silt"){
     curPlant.soil = newSoil;
-    console.log("SoilNum was: "+ curPlant.soilNum);
     curPlant.soilNum = 2;
-    console.log("Changed to: "+ curPlant.soilNum);
     actionPoints--;
     updateInfo(activeTab);
   }else if(newSoil == "Peat"){
     curPlant.soil = newSoil;
-    console.log("SoilNum was: "+ curPlant.soilNum);
     curPlant.soilNum = 3;
-    console.log("Changed to: "+ curPlant.soilNum);
     actionPoints--;
     updateInfo(activeTab);
   }else{
