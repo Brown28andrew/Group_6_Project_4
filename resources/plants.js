@@ -23,13 +23,17 @@ class Plant
     living = true;
     inSun = false;
     exempt = false;
+    soilNum = -1;
+    plantNum = -1;
 
     constructor()
     {
-        var soilNum = randomInRange(0,4);
-        this.soil = soilType[soilNum];
-        var plantNum = randomInRange(0,4);
-        this.plantKind = plantType[plantNum];
+        var pickSoil = randomInRange(0,4);
+        this.soil = soilType[pickSoil];
+        this.soilNum = pickSoil;
+        var pickPlant = randomInRange(0,4);
+        this.plantKind = plantType[pickPlant];
+        this.plantNum = pickPlant;
     }
 }
 
@@ -221,13 +225,15 @@ function gameHandler()
     document.getElementById("actpt").innerHTML = actionPoints;
     alert(`Here's the deal: your friend has taken off on a 40-day study abroad program, and they want you to take care of their houseplants while they're gone.\n
            They're counting on you to keep their plants alive and well! Click on the buttons representing the plants to check each plant's status.\n
-           You may only complete a certain number of actions per day. Every action consumes 1 point. Check the "Action Points" section beneath the plants to see how many you have.`);
+           You may only complete a certain number of actions per day. Every action consumes 1 point. Check the "Action Points" section beneath the plants to see how many you have.\n
+           Random events that affect your plants' health positively or negatively may occur, so take that into account when caring for the plants!`);
 }
 
 function showRules(){
     alert(`Here's the deal: your friend has taken off on a 40-day study abroad program, and they want you to take care of their houseplants while they're gone.\n
            They're counting on you to keep their plants alive and well! Click on the buttons representing the plants to check each plant's status.\n
-           You may only complete a certain number of actions per day. Every action consumes 1 point. Check the "Action Points" section beneath the plants to see how many you have.`);
+           You may only complete a certain number of actions per day. Every action consumes 1 point. Check the "Action Points" section beneath the plants to see how many you have.\n
+           Random events that affect your plants' health positively or negatively may occur, so take that into account when caring for the plants!`);
 }
 
 function waterPlant()
@@ -315,33 +321,33 @@ function changeSoil(){
   if(newSoil == "Loam"){
     curPlant.soil = newSoil;
     console.log("SoilNum was: "+ curPlant.soilNum);
-    curPlant.soilNum = 1;
+    curPlant.soilNum = 0;
     console.log("Changed to: "+ curPlant.soilNum);
     actionPoints--;
     updateInfo(activeTab);
   }else if(newSoil == "Sand"){
     curPlant.soil = newSoil;
     console.log("SoilNum was: "+ curPlant.soilNum);
-    curPlant.soilNum = 2;
+    curPlant.soilNum = 1;
     console.log("Changed to: "+ curPlant.soilNum);
     actionPoints--;
     updateInfo(activeTab);
   }else if(newSoil == "Silt"){
     curPlant.soil = newSoil;
     console.log("SoilNum was: "+ curPlant.soilNum);
-    curPlant.soilNum = 3;
+    curPlant.soilNum = 2;
     console.log("Changed to: "+ curPlant.soilNum);
     actionPoints--;
     updateInfo(activeTab);
   }else if(newSoil == "Peat"){
     curPlant.soil = newSoil;
     console.log("SoilNum was: "+ curPlant.soilNum);
-    curPlant.soilNum = 4;
+    curPlant.soilNum = 3;
     console.log("Changed to: "+ curPlant.soilNum);
     actionPoints--;
     updateInfo(activeTab);
   }else{
-    alert("Error! This is not one of the soils you can choose from")
+    alert("Error! This is not one of the soils you can choose from!")
   }
 }
 
