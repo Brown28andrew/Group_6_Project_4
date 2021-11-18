@@ -1,0 +1,31 @@
+Bug 1:
+    Date reported: Nov. 16
+    Reported by: Andrew Brown
+    Description: Buttons don't render for some plant types
+    Date fixed: Nov. 16
+    Who fixed it: Drew Fink
+    How it was fixed: Fixed CSS reference to graphics
+
+Bug 2:
+    Date reported: Nov. 16
+    Reported by: Andrew Brown
+    Description: Soil type returns undefined
+    Date fixed: Nov. 17
+    Who fixed it: Drew Fink
+    How it was fixed: Moved plant value generation to constructor
+
+Bug 3:
+    Date reported: Nov. 17
+    Reported by: Truman Klenklen
+    Description: Water shortage event does not function properly
+    Date fixed: Nov. 17
+    Who fixed it: Drew Fink
+    How it was fixed: Reset "timesWatered" every day
+
+Bug 4:
+    Date reported: Nov. 17
+    Reported by: Truman Klenklen
+    Description: Changing soil underflows action points
+    Date fixed: Nov. 18
+    Who fixed it: Andrew Brown
+    How it was fixed: Add action point check on change soil method
