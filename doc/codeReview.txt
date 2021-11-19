@@ -1,0 +1,43 @@
+For the code review, we met up during in a Zoom meeting and decided to review the whole JavaScript file because it wasn't too hard. We used the walkthrough process, as most of us were already familiar with the code
+and we could facilitate discussion pretty easily. We used the document-driven way to conduct the walkthrough, and just started at the beginning of the JavaScript file and moved around the methods as they were called.
+We performed this code review after most of our project was completed, so we could find as many end-game bugs as possible. We didn't need test cases as most of the code we had written already had test cases, and 
+we just ran them as we reviewed our code. This code review took us a significant amount of time, we spent around 2 hours reviewing the one file. Because our project was top-down functional decomposition and was
+component-level design, it was easy to review the software. This review was advantageous to our team because we found a good amount of bugs, which would not have been found if we hadn't done the code review. Also,
+these bugs were found pretty early, so we could change them easily without changing most of the HTML or CSS code. We recorded all 5 bugs stated below this text, and then proceeded to fix them later on, because 
+we knew some correct items may be flagged as faoults and it is also inefficient to wait for someone to fix a bug when they could do that later. The only con to reviewing the whole JavaScript file was that it took a lot of time, and for a project as small as this one, we realized that this type
+of review was not feasible for very large projects. Another advantage that we had was we already had reviewed most of Project 3's code base before. So, we could skip over some parts of the new project because we
+used some parts of Project 3 in Project 4.  Some of the bugs that we found are listed below:
+
+Bug 1:
+    Date reported: Nov. 16
+    Reported by: Andrew Brown
+    Description: Buttons don't render for some plant types
+    Who fixed it: Drew Fink
+    How it was fixed: Fixed CSS reference to graphics
+
+Bug 2:
+    Reported by: Andrew Brown
+    Description: Soil type returns undefined
+    Who fixed it: Drew Fink
+    How it was fixed: Moved plant value generation to constructor
+
+Bug 3:
+    Reported by: Truman Klenklen
+    Description: Water shortage event does not function properly
+    Who fixed it: Drew Fink
+    How it was fixed: Reset "timesWatered" every day
+
+Bug 4:
+    Reported by: Truman Klenklen
+    Description: Changing soil underflows action points
+    Who fixed it: Andrew Brown
+    How it was fixed: Add action point check on change soil method
+
+Bug 5:
+    Reported by: Drew Fink
+    Description: Game message loops infinitely after day 40. 
+    Who fixed it: Drew Fink
+    How it was fixed: Changed the loop statement to make sure it didn't infinitely loop.
+
+
+

@@ -1,0 +1,8 @@
+For Project 4, the integration strategy that we used was the top-down integration strategy. This was the easiest strategy to use because we all worked on different parts of the project, and we did testing at 
+each new method we introduced. We split up methods into 2 artifacts, logic artifacts and operational artifacts. Logic artifacts were the methods that made most of the decisions, and handled the input/output
+of the user. Operational artifacts did most of the back-end work, and performed actual operations. The nice thing about using this type of integration was that we found most of the bugs in our code early on,
+and fixed them right as we found them. If not, then the bug would have turned up at a much later stage, and we wouldn't be able to efficiently pinpoint where the bug was from. Also, we made sure our logic was
+correct as well, so it made our lives easier such that there wouldn't be logical bugs in the code. The only problem that we had with top down integration was that we weren't able to use some methods from Project
+3, because we overhauled our UX/UD, and we needed to write that code from scratch. But, because we were all working on separate parts of the project, integrating them was not hard at all. We asked each other if 
+we had any questions, and testing the methods was quite easy with a simple return to the webpage. As a result, we decided that top-down integration would be easiest for us, and the other strategies would be either
+too confusing or would not make sense in a project of this scope. 
