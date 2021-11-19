@@ -38,3 +38,5 @@ Truman Klenklen:
 
 
 Zachary Sambol:
+Nov. 18: 5h
+	- Added test suite and comments to code
