@@ -16,7 +16,17 @@ Oct. 31: 3 hrs
     -Finishing up required documentation.
 
 Andrew Brown:
-
+Nov. 15: 2 hours
+	-Researched soil and plant types to add
+	-Created soilType and plantKind arrays
+	-Added images to the divs for new plant buttons
+Nov. 16: 1 hour
+	-Implemented checker for soil and plant matching types for water depletion
+Nov. 17: 3 hours
+	-Worked on deployment and maintenance plan paragraphs
+	-Implemented rules and change soil buttons/methods
+Nov. 18: 1 hour
+	-Group met up for presentaion video and code review
 
 
 Drew Fink:
