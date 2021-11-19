@@ -233,6 +233,7 @@ function advanceDay()
 			if(!testingMode) {
 				if (confirm("Congratulations, you've gotten to day 40, and all your friend's plants are alive! You win! Press OK to play infinitely and take care of the plants, or cancel to quit now."))
 				{
+                    curDay++; // Fixing infinite loop bug found in code review.
 					alert("Alright, have fun!");
 				}
 				else
