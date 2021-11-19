@@ -4,7 +4,7 @@ var activePlant = 0;
 var activeTab;
 var actionPoints = 3;
 
-var winLoss = 0;
+var winLoss = 0;		//winLoss, testingMode only used by test suite
 var testingMode = false;
 
 var waterShortage = false;
@@ -45,13 +45,21 @@ class Plant
 
 window.onload = createPlants();
 
-
+/*
+* @pre none
+* @param min - floor for random number generation, max - ceiling for random number gen
+* @post outputs pass/fail descriptions for win/loss conditions
+*/
 function randomInRange(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
   }
 
+/*
+* @pre none
+* @post adds 4 fresh plants to plantArr
+*/
 function createPlants()
 {
     for(var i = 0; i < 4; i++)
@@ -60,13 +68,17 @@ function createPlants()
     }
 }
 
+/*
+* @pre none
+* @post curDay increases, updates plant stats, rolls chance for random event, checks win/loss conditions
+*/
 function advanceDay()
 {
     if(Math.random() < 0.1) // 10% chance of any random event occurring
     {
         actionPoints = 3;
 		if(!testingMode) {
-			switch(randomInRange(1, 8))
+			switch(randomInRange(1, 8))			//random events
 			{
 				case 1:
 					alert("Oh no, there's a water shortage! You can only water one plant today!");
@@ -179,7 +191,7 @@ function advanceDay()
             }
         }
 
-        if(p.water <= 25)
+        if(p.water <= 25)				//plant stat alerts and lose conditions
         {
 			if(!testingMode) {
 				alert("Be careful! One of your plants is dangerously low on water!");
@@ -227,7 +239,7 @@ function advanceDay()
             window.location.reload();
         }
 
-        else if(curDay == 40)
+        else if(curDay == 40)					//win conditions
         {	
 			winLoss = 1;
 			if(!testingMode) {
@@ -251,6 +263,10 @@ function advanceDay()
     updateInfo(activeTab);
 }
 
+/*
+* @pre none
+* @post hides/reveals html to show plants and begin the game
+*/
 function gameHandler()
 {
 	document.getElementById("testing").setAttribute("style", "display:none;");
@@ -267,6 +283,10 @@ function gameHandler()
 	}
 }
 
+/*
+* @pre none
+* @post outputs rules of the game as an alert
+*/
 function showRules(){
     alert(`Here's the deal: your friend has taken off on a 40-day study abroad program, and they want you to take care of their houseplants while they're gone.\n
            They're counting on you to keep their plants alive and well! Click on the buttons representing the plants to check each plant's status.\n
@@ -274,6 +294,10 @@ function showRules(){
            Random events that affect your plants' health positively or negatively may occur, so take that into account when caring for the plants!`);
 }
 
+/*
+* @pre none
+* @post increases water value of plant or gives error if user has no action points
+*/
 function waterPlant()
 {
     var watered = plantArr[activePlant];
@@ -300,6 +324,10 @@ function waterPlant()
     }
 }
 
+/*
+* @pre none
+* @post puts plant in sun or gives error if plant is already in sun OR user is out of action points
+*/
 function setSunPlant()
 {
     var curPlant = plantArr[activePlant];
@@ -326,6 +354,10 @@ function setSunPlant()
     }
 }
 
+/*
+* @pre none
+* @post removes plant from sun, or gives error if it is already out of the sun OR user is out of action points
+*/
 function removeSunPlant()
 {
     var curPlant = plantArr[activePlant];
@@ -352,6 +384,10 @@ function removeSunPlant()
     }
 }
 
+/*
+* @pre none
+* @post changes currently selected plant's name to user-given name
+*/
 function renamePlant()
 {
     var curPlant = plantArr[activePlant];
@@ -367,6 +403,10 @@ function renamePlant()
     }
 }
 
+/*
+* @pre none
+* @post changes soil of current plant, or returns error message if user-selected soil doesn't exist OR if user is out of action points
+*/
 function changeSoil(){
   if(actionPoints != 0){
     var curPlant = plantArr[activePlant];
@@ -400,6 +440,11 @@ function changeSoil(){
 
 }
 
+/*
+* @pre none
+* @param tab - the tab of the plant being viewed
+* @post updates text outlining plant and its stats
+*/
 function updateInfo(tab)
 {
     var plant = plantArr[activePlant];
@@ -481,6 +526,13 @@ function asTabs(node) // Appropriated from very old project of Drew's.
     selectTab(0); // to initially show first tab
 }asTabs(document.querySelector("plant-panel"));
 
+/*
+*
+* @brief functions below exist to text important game mechanics/functions
+*
+* @pre none
+* @post sets testingMode to 1, disabling alerts, then begins the test functions
+*/
 function beginTests() {				
 	alert("Testing mode activated, watch the console. The game will automatically restart afterwards. If you're on Chrome, check 'preserve logs' in your browser console to see the output.");
 	testingMode = true;
@@ -492,9 +544,13 @@ function beginTests() {
 	winLossTest();
 }
 
+/*
+* @pre none
+* @post makes sure plants are being created as intended
+*/
 function testPlantCreation() {
 	let pass = 1;
-	if(plantArr.length == 4) {
+	if(plantArr.length == 4) {						//just makes sure that plants are being created
 		for(let i = 0; i < 4; i++) {
 			if(!(plantArr[i].water == 100 && plantArr[i].soil != "Error" && plantArr[i].plantKind != "Error" && plantArr[i].sun == 100 && plantArr[i].living == true && plantArr[i].inSun == false))
 				pass = 0;
@@ -511,6 +567,11 @@ function testPlantCreation() {
 	}
 }
 
+/*
+* @pre none
+* @param changes stands for the current state - 0 = plant not watered and not in sun, 1 = plant unwatered and in sun, others unused
+* @post outputs pass/fail descriptions for plant stat change tests
+*/
 function testGameTick(changes) {
 	let pass = 1;
 	let plantSun = [];
@@ -523,23 +584,23 @@ function testGameTick(changes) {
 	for(let i = 0; i < 4; i++) {
 		if(changes == 0) {
 			if(plantSun[i] <= plantArr[i].sun || plantWater[i] <= plantArr[i].water) {
-					console.log("Unwatered and out-of-sunlight plants' stats do not decrease");
+					console.log("Unwatered and out-of-sunlight plants' stats do not decrease");		//on advanceDay, water and sun should go down without plant in light
 					pass = 0;
 			}
 		}
 		else if(changes == 1) {
-			if(plantSun[i] >= plantArr[i].sun || plantWater[i] <= plantArr[i].water) {
+			if(plantSun[i] >= plantArr[i].sun || plantWater[i] <= plantArr[i].water) {				//on advanceDay, water should go down and sun should go up with plant in light
 					pass = 0;
 					console.log("Plant in sun does not gain sunlight");
 			}
 		}
 		else if(changes == 2) {
-			if(plantSun[i] <= plantArr[i].sun || plantWater[i] >= plantArr[i].water) {
+			if(plantSun[i] <= plantArr[i].sun || plantWater[i] >= plantArr[i].water) {		//unused
 					pass = 0;
 			}
 		}
 		else {
-			if(plantSun[i] >= plantArr[i].sun || plantWater[i] >= plantArr[i].water) {
+			if(plantSun[i] >= plantArr[i].sun || plantWater[i] >= plantArr[i].water) {		//unused
 					pass = 0;
 			}	
 		}			
@@ -552,9 +613,13 @@ function testGameTick(changes) {
 	}
 }
 
+/*
+* @pre none
+* @post outputs pass/fail descriptions for action point tests
+*/
 function testInteraction() {
 	let pass = 1
-	let testWater = [];
+	let testWater = [];						//makes sure action points can change water/sun and that no action points means no changing water/sun
 	actionPoints = 4;
 	for(let i = 0; i < 4; i++) {
 		activePlant = i;
@@ -598,6 +663,10 @@ function testInteraction() {
 	}
 }
 
+/*
+* @pre none
+* @post outputs pass/fail descriptions for soil water loss conditions
+*/
 function soilTest() {
 	waterTest = [];
 	let pass = 0;
@@ -618,7 +687,7 @@ function soilTest() {
 	advanceDay();
 	
 	for(let i = 0; i < 4; i++) {
-		if(100 - plantArr[i].water <= waterTest[i]) {
+		if(100 - plantArr[i].water <= waterTest[i]) {			//gets change in water levels between soil types, then gets amount of plants that don't behave as "expected" (correct soil water loss < incorrect soil water loss)
 			pass++;
 		}
 	}
@@ -630,8 +699,13 @@ function soilTest() {
 		console.log("Preferred soil types successfully cause generally less water loss");
 	}
 }
+
+/*
+* @pre none
+* @post outputs pass/fail descriptions for win/loss conditions
+*/
 function winLossTest() {
-	curDay = 39;
+	curDay = 39;					//brute forces plant stats to be in win/loss conditions, then checks if the game realizes game is won/lost
 	advanceDay();
 	if(winLoss == 1) {
 		console.log("Game is successfully won upon reaching day 40");
