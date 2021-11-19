@@ -1,8 +1,8 @@
-Estimate of Work Hours: 30 hours
+Estimate of Work Hours: 35 hours
 
-We came at this number using the Lines of Code approach. We decided that we would require around 400-500 lines of code for Project 3.                     
+We came at this number using the Lines of Code approach. We decided that we would require around 500-600 lines of code for Project 4.                     
 To code 20 lines per hour seemed reasonable, and we knew that not every line would take the same amount of time, so we took into account
-the research and Googling that would go behind it as well. That brings us to 20 hours of just coding and researching, and the remaining 
+the research and Googling that would go behind it as well. That brings us to 25 hours of just coding and researching, and the remaining 
 10 hours would be spent meeting up over Zoom or in person to work on the project together. 
 
 
@@ -21,14 +21,17 @@ Andrew Brown:
 
 Drew Fink:
 
-Oct. 18: 1h 30m
-    - We met and discussed possible ideas.
+Nov. 15: 1h
+    - Worked on implementation plan for the remaining features.
 
-Oct. 28: 3h
-    - Laid the groundwork for the prototype. Implemented basic features.
+Nov. 16: 30m
+    - Fixed a bug with broken buttons.
 
-Oct. 31: 1h
-    - Refined prototype. Updated UML diagram accordingly.
+Nov. 17: 3h
+    - Implemented action points, random events, fixed bugs
+
+Nov. 18: 3h
+    - Recorded final video, did final review of code.
 
 
 Truman Klenklen:

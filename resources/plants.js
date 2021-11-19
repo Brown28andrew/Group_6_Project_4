@@ -482,7 +482,7 @@ function asTabs(node) // Appropriated from very old project of Drew's.
 }asTabs(document.querySelector("plant-panel"));
 
 function beginTests() {				
-	alert("Testing mode activated, watch the console. The game will need to be restarted after this.");
+	alert("Testing mode activated, watch the console. The game will automatically restart afterwards. If you're on Chrome, check 'preserve logs' in your browser console to see the output.");
 	testingMode = true;
 	gameHandler();
 	testPlantCreation();
